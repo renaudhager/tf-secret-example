@@ -17,6 +17,22 @@ aws kms encrypt \
   > creds.yaml.encrypted
 ``` 
 
+The plan looks like that:
+```
+tf_0.14.8 plan                                                                                                                  (git)-[master]
+
+An execution plan has been generated and is shown below.
+Resource actions are indicated with the following symbols:
+
+Terraform will perform the following actions:
+
+Plan: 0 to add, 0 to change, 0 to destroy.
+
+Changes to Outputs:
+  + password_1 = "bar"
+  + password_2 = "toto"
+```
+
 The secret file (which should not be commited) in plain text contains the following:
 ```yaml
 ---
