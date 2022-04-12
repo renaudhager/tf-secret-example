@@ -10,8 +10,18 @@ terraform {
 }
 
 provider "aws" {
-  region              = "eu-west-1"
-  profile             = "edtech"
+  region  = "eu-west-1"
+  profile = "edtech"
+}
+
+terraform {
+  backend "s3" {
+    bucket     = "renaud-terraform-secret-example"
+    key        = "state.json"
+    region     = "eu-west-1"
+    encrypt    = true
+    kms_key_id = "arn:aws:kms:eu-west-1:479788333518:key/b7576980-6aba-4758-b014-589eacf0d5bb"
+  }
 }
 
 
@@ -26,10 +36,10 @@ locals {
   creds = yamldecode(data.aws_kms_secrets.creds.plaintext["credentials"])
 }
 
-output "password_1"{
-    value = local.creds.mysecret.password
+output "password_1" {
+  value = local.creds.mysecret.password
 }
 
-output "password_2"{
-    value = local.creds.my2dsecret.password
+output "password_2" {
+  value = local.creds.my2dsecret.password
 }
